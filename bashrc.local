@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# 
+export TERM=xterm-256color
+export CLICOLOR=true
+
+# History 
+shopt -s histappend
+
+export HISTFILESIZE=100000
+export HISTSIZE=100000
+
+# Custom path
+export PATH=/home/hartem/sft/bin:$PATH
+export LD_LIBRARY_PATH=/home/hartem/sft/lib:$LD_LIBRARY_PATH
+
+# Dev env 
+SRC_TRUNK=/home/hartem/src/siem/lm/releases/trunk
+
+. $SRC_TRUNK/makeincl/setup-dev-env 
+
+# Ignore .svn for completion
+export FIGNORE=.svn
+
