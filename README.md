@@ -1,4 +1,4 @@
 dot
 ===
 
-Various configuration files
+Configuration files backup
