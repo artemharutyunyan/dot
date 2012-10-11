@@ -1,4 +1,4 @@
-x(setq linum-format "%3d ")
+(setq linum-format "%3d ")
 (global-linum-mode 1)
 
 (setq tab-width 4)
