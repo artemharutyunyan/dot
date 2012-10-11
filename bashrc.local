@@ -22,3 +22,5 @@ SRC_TRUNK=/home/hartem/src/siem/lm/releases/trunk
 # Ignore .svn for completion
 export FIGNORE=.svn
 
+alias e='emacsclient -t'
+

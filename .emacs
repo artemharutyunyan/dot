@@ -1,4 +1,4 @@
-(setq linum-format "%3d ")
+x(setq linum-format "%3d ")
 (global-linum-mode 1)
 
 (setq tab-width 4)
@@ -53,3 +53,19 @@
 
 ;; Mouse 
 (xterm-mouse-mode)
+
+;; Workgroups 
+(add-to-list 'load-path "~/emacs.d/site-lisp/workgroups.el")
+(require 'workgroups)
+(workgroups-mode 1)
+;; (wg-load "~/wg")
+
+;; Scrolling 
+(defun up-slightly () (interactive) (scroll-up 5))
+(defun down-slightly () (interactive) (scroll-down 5))
+
+(global-set-key (kbd "<mouse-4>") 'down-slightly)
+(global-set-key (kbd "<mouse-5>") 'up-slightly)
+
+;; Symlinks 
+(setq vc-follow-symlinks 1)
