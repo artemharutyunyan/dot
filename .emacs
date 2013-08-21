@@ -78,3 +78,19 @@
 (add-to-list 'load-path "~/emacs.d/site-lisp/auto-install")
 (require 'auto-install)
 (setq auto-install-directory "~/emacs.d/auto-install)
+
+;; Goto line
+(global-set-key "\C-l" 'goto-line)
+
+;; Word wrap
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook '(lambda() (set-fill-column 78)))
+
+;; Smooth scroll
+(add-to-list 'load-path "~/emacs.d/site-lisp/smooth-scroll")
+(require 'smooth-scroll)
+(setq scroll-step 1)
+(setq scroll-conservatively 10000)
+(setq auto-window-vscroll nil)
+
+
