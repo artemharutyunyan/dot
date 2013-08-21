@@ -73,3 +73,8 @@
 
 ;; Symlinks 
 (setq vc-follow-symlinks 1)
+
+;; auto-install
+(add-to-list 'load-path "~/emacs.d/site-lisp/auto-install")
+(require 'auto-install)
+(setq auto-install-directory "~/emacs.d/auto-install)
