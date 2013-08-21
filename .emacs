@@ -1,5 +1,6 @@
-(setq linum-format "%3d ")
-(global-linum-mode 1)
+;;(setq linum-format "%3d ")
+;;(setq fringe-mode none)
+;;(global-linum-mode 1)
 
 (setq tab-width 4)
 (setq tab-stop-list (number-sequence 4 200 4))
@@ -9,8 +10,8 @@
 
 ;; get rid of unecessary bars
 (menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+;;(tool-bar-mode -1)
+;;(scroll-bar-mode -1)
 
 (show-paren-mode t)
 (column-number-mode t)
@@ -40,7 +41,7 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; erlang
-(setq erlang-otp-root       "/opt/erlang/r15b02")
+(setq erlang-otp-root       "/opt/erlang/current")
 (setq erlang-tools-version  "2.6.8")
 
 (setq load-path (cons (format "%s/%s-%s/%s" erlang-otp-root "lib/tools" erlang-tools-version "emacs") load-path))
@@ -51,13 +52,16 @@
 ;; Shell
 (global-set-key [f1] 'shell)
 
-;; Mouse 
-(xterm-mouse-mode)
+;; Mouse
+(require 'mouse) 
+(xterm-mouse-mode t)
+(defun track-mouse (e))
+(setq mouse-sel-mode t)
 
 ;; Workgroups 
 (add-to-list 'load-path "~/emacs.d/site-lisp/workgroups.el")
-(require 'workgroups)
-(workgroups-mode 1)
+;;(require 'workgroups)
+;;(workgroups-mode 1)
 ;; (wg-load "~/wg")
 
 ;; Scrolling 
