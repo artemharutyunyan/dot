@@ -1,6 +1,5 @@
-;;(setq linum-format "%3d ")
-;;(setq fringe-mode none)
-;;(global-linum-mode 1)
+(setq linum-format "%3d ")
+(global-linum-mode 1)
 
 (setq tab-width 4)
 (setq tab-stop-list (number-sequence 4 200 4))
@@ -29,7 +28,6 @@
   '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
 
 ;; create the autosave dir if necessary, since emacs won't.
-
 (make-directory "~/.emacs.d/autosaves/" t)
 
 (setq frame-title-format
@@ -74,11 +72,6 @@
 ;; Symlinks 
 (setq vc-follow-symlinks 1)
 
-;; auto-install
-(add-to-list 'load-path "~/emacs.d/site-lisp/auto-install")
-(require 'auto-install)
-(setq auto-install-directory "~/emacs.d/auto-install)
-
 ;; Goto line
 (global-set-key "\C-l" 'goto-line)
 
@@ -93,4 +86,16 @@
 (setq scroll-conservatively 10000)
 (setq auto-window-vscroll nil)
 
+;; Anything 
+(add-to-list 'load-path "~/emacs.d/site-lisp/anything")
+;;(require 'anything)
+;;(require 'anything-match-plugin)
+;;(require 'anything-config)
+
+(add-to-list 'load-path "~/emacs.d/site-lisp/projectile")
+(require 'projectile)
+(require 'grizzl)
+(projectile-global-mode)
+;;(setq projectile-enable-caching t)
+(setq projectile-completion-system 'grizzl)
 
