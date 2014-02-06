@@ -9,18 +9,9 @@
 
 ;; get rid of unecessary bars
 (menu-bar-mode -1)
-;;(tool-bar-mode -1)
-;;(scroll-bar-mode -1)
-
 (show-paren-mode t)
 (column-number-mode t)
 
-
-(add-to-list 'load-path "~/emacs.d/site-lisp/color-theme")
-(add-to-list 'load-path "~/emacs.d/site-lisp/emacs-colors-solarized")
-
-(if (require 'color-theme-solarized "color-theme-solarized.el" t)
-    (color-theme-solarized-dark))
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
 (custom-set-variables
@@ -34,33 +25,14 @@
       (list (format "%s %%S: %%j " (system-name))
         '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
-;; Buffer names
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
-
-;; erlang
-(setq erlang-otp-root       "/opt/erlang/current")
-(setq erlang-tools-version  "2.6.8")
-
-(setq load-path (cons (format "%s/%s-%s/%s" erlang-otp-root "lib/tools" erlang-tools-version "emacs") load-path))
-(setq erlang-root-dir erlang-otp-root)
-(setq exec-path (cons (format "%s/%s" erlang-otp-root "bin") exec-path))
-(require 'erlang-start)
-
 ;; Shell
-(global-set-key [f1] 'shell)
+(global-set-key [f1] 'eshell)
 
 ;; Mouse
 (require 'mouse) 
 (xterm-mouse-mode t)
 (defun track-mouse (e))
 (setq mouse-sel-mode t)
-
-;; Workgroups 
-(add-to-list 'load-path "~/emacs.d/site-lisp/workgroups.el")
-;;(require 'workgroups)
-;;(workgroups-mode 1)
-;; (wg-load "~/wg")
 
 ;; Scrolling 
 (defun up-slightly () (interactive) (scroll-up 5))
@@ -79,6 +51,23 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook '(lambda() (set-fill-column 78)))
 
+;; erlang
+(setq erlang-otp-root       "/opt/erlang/current")
+(setq erlang-tools-version  "2.6.11")
+
+(setq load-path (cons (format "%s/%s-%s/%s" erlang-otp-root "lib/tools" erlang-tools-version "emacs") load-path))
+(setq erlang-root-dir erlang-otp-root)
+(setq exec-path (cons (format "%s/%s" erlang-otp-root "bin") exec-path))
+(require 'erlang-start)
+
+;; Buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+;;(add-to-list 'load-path "~/emacs.d/site-lisp/color-theme")
+(add-to-list 'custom-theme-load-path "~/emacs.d/site-lisp/emacs-color-theme-solarized")
+(load-theme 'solarized-dark t)
+
 ;; Smooth scroll
 (add-to-list 'load-path "~/emacs.d/site-lisp/smooth-scroll")
 (require 'smooth-scroll)
@@ -86,16 +75,23 @@
 (setq scroll-conservatively 10000)
 (setq auto-window-vscroll nil)
 
-;; Anything 
-(add-to-list 'load-path "~/emacs.d/site-lisp/anything")
-;;(require 'anything)
-;;(require 'anything-match-plugin)
-;;(require 'anything-config)
+;; clang-format
+(load "/home/hartem/src/llvm/tools/clang/tools/clang-format/clang-format.el")
+(global-set-key [f2] 'clang-format-region)
 
-(add-to-list 'load-path "~/emacs.d/site-lisp/projectile")
-(require 'projectile)
-(require 'grizzl)
-(projectile-global-mode)
-;;(setq projectile-enable-caching t)
-(setq projectile-completion-system 'grizzl)
+;; auto-complete
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+
+(global-set-key "%" 'match-paren)
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
+
+(ido-mode t)
 
