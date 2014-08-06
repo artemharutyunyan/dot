@@ -5,7 +5,8 @@ set ls=2         " allways show status line
 set shiftwidth=4 " numbers of spaces to (auto)indent
 set ignorecase   " ignore case when searching 
 set tabstop=4    " Tab length 
-" set expandtab    " Substitute tabs with spaces 
+
+set expandtab    " Substitute tabs with spaces 
 set nu           " Enable line numbering 
 set hlsearch     " Highlight matched search pattern
 set autoindent   " always set autoindenting on
@@ -19,6 +20,9 @@ set ruler        " Show cursor position
 
 " ex command for toggling hex mode - define mapping if desired
 command -bar Hexmode call ToggleHex()
+
+" JSON 
+au! BufRead,BufNewFile *.json set filetype=json 
 
 " helper function to toggle hex mode
 function ToggleHex()
