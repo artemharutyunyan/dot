@@ -1,10 +1,10 @@
 syntax on        " Syntax highlighting 
-colorscheme desert 
+colorscheme desert
 
 set ls=2         " allways show status line
 set shiftwidth=4 " numbers of spaces to (auto)indent
 set ignorecase   " ignore case when searching 
-set tabstop=4    " Tab length 
+set tabstop=2    " Tab length 
 
 set expandtab    " Substitute tabs with spaces 
 set nu           " Enable line numbering 
@@ -61,3 +61,9 @@ function ToggleHex()
   let &readonly=l:oldreadonly
   let &modifiable=l:oldmodifiable
 endfunction
+
+map <C-K> :pyf /Users/hartem/src/llvm/tools/clang/tools/clang-format/clang-format.py<CR>
+imap <C-K> <ESC>:pyf  /Users/hartem/src/llvm/tools/clang/tools/clang-format/clang-format.py<CR>i
+
+match ErrorMsg '\s\+$'
+
