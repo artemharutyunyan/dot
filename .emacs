@@ -29,36 +29,28 @@
 (global-set-key [f1] 'eshell)
 
 ;; Mouse
-(require 'mouse) 
+(require 'mouse)
 (xterm-mouse-mode t)
 (defun track-mouse (e))
 (setq mouse-sel-mode t)
 
-;; Scrolling 
+;; Scrolling
 (defun up-slightly () (interactive) (scroll-up 5))
 (defun down-slightly () (interactive) (scroll-down 5))
 
 (global-set-key (kbd "<mouse-4>") 'down-slightly)
 (global-set-key (kbd "<mouse-5>") 'up-slightly)
 
-;; Symlinks 
+;; Symlinks
 (setq vc-follow-symlinks 1)
 
 ;; Goto line
 (global-set-key "\C-l" 'goto-line)
 
 ;; Word wrap
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-move-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook '(lambda() (set-fill-column 78)))
 
-;; erlang
-(setq erlang-otp-root       "/opt/erlang/current")
-(setq erlang-tools-version  "2.6.11")
-
-(setq load-path (cons (format "%s/%s-%s/%s" erlang-otp-root "lib/tools" erlang-tools-version "emacs") load-path))
-(setq erlang-root-dir erlang-otp-root)
-(setq exec-path (cons (format "%s/%s" erlang-otp-root "bin") exec-path))
-(require 'erlang-start)
 
 ;; Buffer names
 (require 'uniquify)
@@ -75,23 +67,27 @@
 (setq scroll-conservatively 10000)
 (setq auto-window-vscroll nil)
 
-;; clang-format
-(load "/home/hartem/src/llvm/tools/clang/tools/clang-format/clang-format.el")
-(global-set-key [f2] 'clang-format-region)
-
-;; auto-complete
-(add-to-list 'load-path "~/.emacs.d/")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-
 (global-set-key "%" 'match-paren)
 (defun match-paren (arg)
   "Go to the matching paren if on a paren; otherwise insert %."
-  (interactive "p")
+ (interactive "p")
   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
         (t (self-insert-command (or arg 1)))))
 
 (ido-mode t)
 
+(global-set-key [home] 'move-beginning-of-line)
+(global-set-key [end] 'move-end-of-line)
+
+(setq-default show-trailing-whitespace t)
+
+(load "~/emacs.d/site-lisp/clang-format/clang-format.el")
+(global-set-key [f2] 'clang-format-region)
+
+(load "~/emacs.d/site-lisp/markdown-mode/markdown-mode.el")
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+ (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+ (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+ (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
